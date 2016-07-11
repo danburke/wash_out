@@ -5,6 +5,13 @@ xml.tag! "soap:Envelope", "xmlns:soap" => 'http://schemas.xmlsoap.org/soap/envel
     xml.tag! "soap:Fault", :encodingStyle => 'http://schemas.xmlsoap.org/soap/encoding/' do
       xml.faultcode error_code, 'xsi:type' => 'xsd:QName'
       xml.faultstring error_message, 'xsi:type' => 'xsd:string'
+      if detail != nil
+        xml.tag! "detail" do
+          detail.each{|k, v|
+            xml.tag!(k, v)
+          }
+        end
+      end
     end
   end
 end
