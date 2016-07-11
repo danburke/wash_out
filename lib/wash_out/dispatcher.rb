@@ -32,8 +32,11 @@ module WashOut
     end
 
     def _map_soap_parameters
+      unless action_spec[:in]
+        puts env
+      end
       @_params = _load_params action_spec[:in],
-        _strip_empty_nodes(action_spec[:in], xml_data)
+      _strip_empty_nodes(action_spec[:in], xml_data)
     end
 
     def _map_soap_headers
@@ -165,7 +168,6 @@ module WashOut
     end
 
     def soap_request
-      puts "Headers: #{@_soap_headers}"
       OpenStruct.new({
         params: @_params,
         headers: @_soap_headers

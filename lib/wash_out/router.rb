@@ -109,7 +109,7 @@ module WashOut
 
     def call(env)
       @controller = @controller_name.constantize
-
+      #puts env
       soap_action = parse_soap_action(env)
 
       action = if soap_action.blank?
